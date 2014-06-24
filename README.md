@@ -1,10 +1,11 @@
 Reem
 ====
 
-Reem is a static site generator built for everything. Written in JavaScript, stealing the best ideas from Jekyll, Metalsmith, Middleman, and all the other generators that come before her, Reem is the one generator that can do it all.
+Reem is a static site generator written in JavaScript. Reem reads a source directory into a tree structure, which is then processed internally and then by customizable plugins and middleware. The final tree is rendered and written to the output directory, and the site is ready to host.
 
-## Philosophy
-Be realistic to people's needs; specialize to no single use case, but advocate specialization as much as possible.
+Reem has both a command-line interface and a programming interface suitable for personal and automated production of static sites.
+
+Reem is realistic to people's needs; specializing to no single use case, but advocating specialization as much as possible.
 
 ## Getting Started
 
@@ -25,6 +26,7 @@ reem --init
 Which creates the default folder/file structure:
 
 ```
+site
 |- layout/
 |- output/
 |- source/
@@ -62,7 +64,7 @@ Reem is a complex beast of unimaginable flexibility, performance, and developer 
 More Reem plugins can be found on [npm](https://www.npmjs.org/search?q=reem-plugin).
 
 ## Contributing
-Reem is a relatively new static site generator. To ensure the community their plugins will not potential break every day, Reem will strive to keep any and all changes backwards-compatible until the ^1.0.0 release. So basically, v0 is being treated like v1.
+Reem is a relatively new static site generator. To ensure the community their plugins will not potential break every day, Reem will strive to keep any and all changes backwards-compatible until the v1.0.0 release. So basically, v0 is being treated like v1.
 
 Contributions are incredibly welcome. If you find an bug, open an issue. Feature requests are also welcome, but considering making a standalone plugin first. Any pull requests must pass the tests found in `test/`; if the pull does not pass, please explain why.
 
