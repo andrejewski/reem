@@ -49,10 +49,10 @@ Reem is a complex beast of unimaginable flexibility, performance, and developer 
 
 ## Reading
 
-- [Introducing Reem](http://chrisandrejewski.com/paper/reem/introducing-reem.html), A Philosophy and Features Brief
-- [Creating a Static Markdown Website](http://chrisandrejewski.com/paper/reem/markdown-site.html), Beginner Tutorial
-- [Superusing the CLI](http://chrisandrejewski.com/paper/reem/superusing-cli.html), Reem's Command-line Guide
-- [Developing a Great Reem Plugin](http://chrisandrejewski.com/paper/reem/plugin-crafting.html), Best Practices and Good Manners
+- [Introducing Reem](http://chrisandrejewski.com/reem/introducing-reem.html), A Philosophy and Features Brief
+- [Creating a Static Markdown Website](http://chrisandrejewski.com/reem/markdown-site.html), Beginner Tutorial
+- [Superusing the CLI](http://chrisandrejewski.com/reem/superusing-cli.html), Reem's Command-line Guide
+- [Developing a Great Reem Plugin](http://chrisandrejewski.com/reem/plugin-crafting.html), Best Practices and Good Manners
 
 ## Plugins
 
