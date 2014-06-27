@@ -96,6 +96,22 @@ describe("Reem", function() {
 			}
 			reem.diffBuild(path.join(__dirname, 'layout', 'template'), done);
 		});
+		it("should call #read() with a filename-derived list node", function(done) {
+			var reem = Reem(__dirname),
+				filepath = path.join(__dirname, 'source', 'directory', 'file'),
+				listpath = path.dirname(filepath);
+			reem._tree = reem.fs.source;
+			reem.build = function() {throw new Error("#build() should not be called.");}
+			reem.read = function(node, next) {
+				assert.equal(listpath, node.sourcePath);
+				assert.equal('directory', node.basename);
+				assert.equal('', node.extension);
+				done();
+			}
+			assert.doesNotThrow(function() {
+				reem.diffBuild(filepath, function(error) {});
+			});
+		});
 	});
 	describe("#read()", function() {
 
@@ -153,6 +169,25 @@ describe("Reem", function() {
 	});
 	describe("#write()", function() {
 
+	});
+	describe("#render()", function() {
+		it("should, if no engine is specified, return the item's content", function(done) {
+			var reem = Reem(__dirname);
+			reem.view.engine = null;
+			reem.render({content: "string"}, function(error, html) {
+				assert.equal("string", html);
+				done();
+			});
+		});
+		it("should intelligently guess the template view name", function(done) {
+			var reem = Reem(__dirname),
+				item = {filetype: 'post'};
+			reem.view.extension = '.html';
+			reem.render(item, function(error, html) {
+				assert.equal('post.html', item.view);
+				done();
+			});
+		});
 	});
 	describe("#error()", function() {
 		it("should return the passed function or a no-op", function() {

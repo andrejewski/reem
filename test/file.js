@@ -61,6 +61,16 @@ describe("File", function() {
 			assert.equal(true, fs.readIgnore("normal.txt"));
 		});
 	});
+	describe("#pathItem()", function() {
+		it("should assign .outputPath and .url of a given item", function() {
+			var fs = File(__dirname),
+				outs = path.join(__dirname, 'output', 'directory', 'file')
+				item = {outputPath: outs};
+			fs.pathItem(item);
+			assert.equal(outs, item.outputPath);
+			assert.equal("/directory/file", item.url);
+		});
+	});
 	describe("#outputPath()", function() {
 		it("should accept an item", function() {
 			var fs = File(__dirname),
@@ -91,6 +101,11 @@ describe("File", function() {
 				};
 			assert.equal(pp("output/webpage.html"), fs.outputPath(item));
 			assert.equal("string", typeof fs.outputPath(item));
+		});
+		it("should return the item's outputPath if set", function() {
+			var fs = File(__dirname),
+				item = {outputPath: "string"};
+			assert.equal("string", fs.outputPath(item));
 		});
 	});
 	describe("#urlPath()", function() {
