@@ -71,11 +71,23 @@ describe("Reem", function() {
 			r.addPage(page);
 			assert.equal(page, r.pages.pop());
 		});
-		it("should set the object's filetype to 'page'", function() {
+		it("should set page.filetype to 'page'", function() {
 			var r = Reem(__dirname),
 				page = {};
 			r.addPage(page);
 			assert.equal('page', r.pages.pop().filetype);
+		});
+		it("should set page.fixedWrite to true", function() {
+			var r = Reem(__dirname),
+				page = {};
+			r.addPage(page);
+			assert.equal(true, r.pages.pop().fixedWrite);
+		});
+		it("should set page.renderFile to true", function() {
+			var r = Reem(__dirname),
+				page = {};
+			r.addPage(page);
+			assert.equal(true, r.pages.pop().renderFile);
 		});
 	});
 	describe("#build()", function() {
@@ -171,17 +183,25 @@ describe("Reem", function() {
 
 	});
 	describe("#render()", function() {
+		it("should return the item's content if item.renderFile is not set", function(done) {
+			var reem = Reem(__dirname),
+				item = {content: 'string'};
+			reem.render(item, function(error, content) {
+				assert.equal(item.content, content);
+				done();
+			});
+		});
 		it("should, if no engine is specified, return the item's content", function(done) {
 			var reem = Reem(__dirname);
 			reem.view.engine = null;
-			reem.render({content: "string"}, function(error, html) {
+			reem.render({content: "string", renderFile: true}, function(error, html) {
 				assert.equal("string", html);
 				done();
 			});
 		});
 		it("should intelligently guess the template view name", function(done) {
 			var reem = Reem(__dirname),
-				item = {filetype: 'post'};
+				item = {filetype: 'post', renderFile: true};
 			reem.view.extension = '.html';
 			reem.render(item, function(error, html) {
 				assert.equal('post.html', item.view);
