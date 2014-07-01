@@ -35,30 +35,30 @@ describe("File", function() {
 			assert.equal('object', typeof File(__dirname));
 		});
 	});
-	describe("#readIgnore()", function() {
+	describe("#readAccept()", function() {
 		it("should return a Boolean", function() {
 			var fs = File(__dirname);
-			assert.equal("boolean", typeof fs.readIgnore(".extension"));
-			assert.equal("boolean", typeof fs.readIgnore("basename"));
-			assert.equal("boolean", typeof fs.readIgnore("basename.extension"));
+			assert.equal("boolean", typeof fs.readAccept(".extension"));
+			assert.equal("boolean", typeof fs.readAccept("basename"));
+			assert.equal("boolean", typeof fs.readAccept("basename.extension"));
 		});
 		it("should, by default, filter out hidden files", function() {
 			var fs = File(__dirname);
 
-			assert.equal(true, fs.readIgnore("normal.txt"));
-			assert.equal(true, fs.readIgnore("normal."));
-			assert.equal(true, fs.readIgnore("normal"));
+			assert.equal(true, fs.readAccept("normal.txt"));
+			assert.equal(true, fs.readAccept("normal."));
+			assert.equal(true, fs.readAccept("normal"));
 
-			assert.equal(false, fs.readIgnore(".gitignore"));
-			assert.equal(false, fs.readIgnore(".DS_Store"));
+			assert.equal(false, fs.readAccept(".gitignore"));
+			assert.equal(false, fs.readAccept(".DS_Store"));
 		});
 		it("should use the regexes in array File.ignoreRegexes", function() {
 			var fs = File(__dirname);
-			assert.equal(true, fs.readIgnore("normal.txt"));
+			assert.equal(true, fs.readAccept("normal.txt"));
 			fs.ignoreRegexes.push(/.*/);
-			assert.equal(false, fs.readIgnore("normal.txt"));
+			assert.equal(false, fs.readAccept("normal.txt"));
 			fs.ignoreRegexes = [];
-			assert.equal(true, fs.readIgnore("normal.txt"));
+			assert.equal(true, fs.readAccept("normal.txt"));
 		});
 	});
 	describe("#pathItem()", function() {
