@@ -49,10 +49,12 @@ Reem is a complex beast of unimaginable flexibility, performance, and developer 
 
 ## Reading
 
-- [Introducing Reem](http://chrisandrejewski.com/reem/introducing-reem.html), A Philosophy and Features Brief
-- [Creating a Static Markdown Website](http://chrisandrejewski.com/reem/markdown-site.html), Beginner Tutorial
-- [Superusing the CLI](http://chrisandrejewski.com/reem/superusing-cli.html), Reem's Command-line Guide
-- [Developing a Great Reem Plugin](http://chrisandrejewski.com/reem/plugin-crafting.html), Best Practices and Good Manners
+The Reem Wiki has official documentation, tutorials, and examples.
+
+- [Introducing Reem](https://github.com/andrejewski/reem/wiki/Introducing-Reem), A Philosophy and Features Brief
+- [Creating a Static Markdown Website](https://github.com/andrejewski/reem/wiki/Creating-a-Static-Markdown-Website), Beginner Tutorial
+- [Superusing the CLI](https://github.com/andrejewski/reem/wiki/Superusing-the-CLI), Reem's Command-line Guide
+- [Developing a Great Reem Plugin](https://github.com/andrejewski/reem/wiki/Developing-a-Great-Reem-Plugin), Best Practices and Good Manners
 
 ## Plugins
 
@@ -71,6 +73,5 @@ Contributions are incredibly welcome. If you find an bug, open an issue. Feature
 ```bash
 # running tests
 npm run test
-npm run test-spec
 ```
 
