@@ -19,6 +19,9 @@ program
 	.option('-p, --production', 'configure to build for production')
 	.parse(process.argv);
 
+program.folder = program.dir;
+program.script = program.run;
+
 var reem,
 	root = (function() {
 		if(program.folder) {
