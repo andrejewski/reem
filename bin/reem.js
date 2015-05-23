@@ -3,7 +3,6 @@
 
 var fs = require('fs'),
 	path = require('path'),
-	exists = fs.existsSync || path.existsSync,
 	Reem = require('../'),
 	async = require('async'),
 	program = require('commander'),
@@ -19,18 +18,10 @@ program
 	.option('-p, --production', 'configure to build for production')
 	.parse(process.argv);
 
-program.folder = program.dir;
-program.script = program.run;
-
 var reem,
-	root = (function() {
-		if(program.folder) {
-			if(exists(program.folder)) return program.folder;
-			var relativeFolder = path.join(process.cwd(), program.folder);
-			if(exists(relativeFolder)) return relativeFolder;
-		}
-		return process.cwd();
-	})();
+	root = program.dir 
+		? path.join(process.cwd(), program.dir)
+		: process.cwd();
 
 if(program.init) return init();
 exec();
@@ -48,8 +39,14 @@ function init() {
 	function mkdir(name) {
 		return function(done) {
 			var dir = path.join(root, name);
-			if(exists(dir)) return done(null);
-			fs.mkdir(dir, done);
+			fs.stat(dir, function(error, stats) {
+				if(error && error.code === 'ENOENT') {
+					// directory does not exist
+					fs.mkdir(dir, done);
+				} else {
+					done(error);
+				}
+			});
 		}
 	}
 
@@ -63,8 +60,14 @@ function init() {
 				'	done(null);',
 				'}'
 			].join("\n");
-		if(exists(file)) return done(null);
-		fs.writeFile(file, REEMFILE, done);
+		fs.readFile(file, function(error) {
+			if(error && error.code === 'ENOENT') {
+				// file does not exist yet
+				fs.writeFile(file, REEMFILE, done);
+			} else {
+				done(error);
+			}
+		});
 	}
 }
 
@@ -91,21 +94,8 @@ function exec() {
 	}
 
 	function getReemfile() {
-		if(program.script) {
-			if(exists(program.script)) {
-				return require(program.script);
-			}
-			if(exists(path.join(root, program.script))) {
-				return require(program.script);
-			}
-		}
-		
-		var reemfile = path.join(root, 'reemfile.js');
-		if(exists(reemfile)) return require(reemfile);
-
-		var	nodemain = require(path.join(root, 'package.json')).main,
-			mainfile = path.join(root, nodemain || 'index.js');
-		if(exists(mainfile)) return require(mainfile);
+		return require(
+			path.join(root, program.run || 'reemfile.js'));
 	}
 
 	function build(done) {
