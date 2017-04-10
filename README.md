@@ -1,6 +1,8 @@
 Reem
 ====
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/andrejewski/reem.svg)](https://greenkeeper.io/)
+
 Reem is a static site generator written in JavaScript. Reem reads a source directory into a tree structure, which is then processed internally and then by customizable plugins and middleware. The final tree is rendered and written to the output directory, and the site is ready to host.
 
 Reem has both a command-line interface and a programming interface suitable for personal and automated production of static sites.
